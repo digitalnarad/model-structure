@@ -79,40 +79,6 @@ const aggregation = async (model, data) => {
   return await mongoose.model(model).aggregate(data);
 };
 
-//populate
-const populate = async (
-  modelName,
-  criteria,
-  projection = {},
-  options = { lean: true },
-  populate = [],
-  limit,
-  skip,
-  sort
-) => {
-  options.lean = true;
-  return await mongoose
-    .model(modelName)
-    .find(criteria, projection, options)
-    .skip(skip)
-    .limit(limit)
-    .populate(populate)
-    .sort(sort);
-};
-
-// count documents
-const countDocument = async (modelName, criteria,) => {
-  return await mongoose.model(modelName).countDocuments(criteria)
-}
-
-const deleteDocument = async (model, criteria) => {
-  return await mongoose.model(model).findOneAndDelete(criteria);
-}
-
-const deleteManyDocument = async(model, criteria) =>{
-  return await mongoose.model(model).deleteMany(criteria);
-}
-
 module.exports = {
   findOne,
   findOnePopulate,
@@ -122,8 +88,4 @@ module.exports = {
   updateOne,
   updateMany,
   aggregation,
-  populate,
-  countDocument,
-  deleteDocument,
-  deleteManyDocument,
 };
